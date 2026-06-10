@@ -1,0 +1,63 @@
+# Render Infrastructure-as-Code Blueprint
+# Docs: https://render.com/docs/blueprint-spec
+#
+# To deploy:
+#   1. Go to https://render.com → New → Blueprint
+#   2. Connect your GitHub repo (MithunAb94/rent-a-friend)
+#   3. Render will read this file and create all services automatically
+#
+# Environment variables referenced below should be set in the Render dashboard
+# or will be auto-provisioned by the blueprint.
+
+services:
+  # ──────────────────────────────────────────
+  # Backend API — Spring Boot Web Service
+  # ──────────────────────────────────────────
+  - type: web
+    name: rent-a-friend-api
+    runtime: java
+    plan: free
+    region: oregon
+    buildCommand: cd backend && mvn clean package -DskipTests
+    startCommand: cd backend && java -jar target/*.jar
+    envVars:
+      - key: PORT
+        value: "8011"
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JAVA_VERSION
+        value: "17"
+      # CORS: set to your Vercel frontend URL after first deploy
+      # e.g. https://rent-a-friend.vercel.app
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      # PostgreSQL connection (auto-provisioned by the database below)
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: rent-a-friend-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: rent-a-friend-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: rent-a-friend-db
+          property: password
+    healthCheckPath: /swagger-ui.html
+    autoDeploy: true
+    # Only redeploy when backend files change
+    filter:
+      paths:
+        - backend/**
+        - render.yaml
+
+# ──────────────────────────────────────────
+# PostgreSQL Database
+# ──────────────────────────────────────────
+databases:
+  - name: rent-a-friend-db
+    plan: free
+    region: oregon
+    databaseName: rentafriend
+    user: rentafriend

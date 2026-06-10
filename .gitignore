@@ -3,6 +3,8 @@ backend/target/
 backend/data/
 frontend/node_modules/
 frontend/dist/
+frontend/.vercel-tmp/
+frontend/.vercel/
 .tools/
 .runlogs/
 .DS_Store
@@ -17,6 +19,5 @@ application-local.yml
 
 run-backend-local.ps1
 run-frontend.ps1
-package-lock.json
 *.timestamp-*.mjs
 
