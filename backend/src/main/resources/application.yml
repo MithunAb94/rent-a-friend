@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: rent-a-friend
+  profiles:
+    default: prod
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+server:
+  port: ${PORT:8011}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
