@@ -50,6 +50,7 @@ public class BookingService {
         return toSummaryDto(savedBooking);
     }
 
+    @Transactional(readOnly = true)
     public List<BookingSummaryDto> getBookingsForUser(UserAccount user) {
         return bookingRequestRepository.findByUserIdOrderByPreferredDateAscCreatedAtDesc(user.getId())
                 .stream()
