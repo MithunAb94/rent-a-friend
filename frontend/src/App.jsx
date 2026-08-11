@@ -562,13 +562,15 @@ function App() {
                       placeholder="Phone number"
                       required
                     />
-                    <input
-                      type="date"
-                      value={registerForm.dateOfBirth}
-                      onChange={(event) => updateRegisterField("dateOfBirth", event.target.value)}
-                      required
-                    />
-                    <input
+                    <label className="field">
+                      <span>Date of birth</span>
+                      <input
+                          type="date"
+                          value={registerForm.dateOfBirth}
+                          onChange={(event) => updateRegisterField("dateOfBirth", event.target.value)}
+                          required
+                      />
+                    </label>                    <input
                       value={registerForm.city}
                       onChange={(event) => updateRegisterField("city", event.target.value)}
                       placeholder="City"
@@ -807,18 +809,28 @@ function App() {
                         In person {inPersonLocked ? "(verification required)" : ""}
                       </option>
                     </select>
-                    <input
-                      type="date"
-                      value={bookingForm.preferredDate}
-                      onChange={(event) => setBookingForm({ ...bookingForm, preferredDate: event.target.value })}
-                      required
-                    />
-                    <input
-                      type="time"
-                      value={bookingForm.preferredTime}
-                      onChange={(event) => setBookingForm({ ...bookingForm, preferredTime: event.target.value })}
-                      required
-                    />
+                    <label className="field">
+                      <span>Booking date</span>
+                      <input
+                          type="date"
+                          value={bookingForm.preferredDate}
+                          onChange={(event) =>
+                              setBookingForm({ ...bookingForm, preferredDate: event.target.value })
+                          }
+                          required
+                      />
+                    </label>
+                    <label className="field">
+                      <span>Booking time</span>
+                      <input
+                          type="time"
+                          value={bookingForm.preferredTime}
+                          onChange={(event) =>
+                              setBookingForm({ ...bookingForm, preferredTime: event.target.value })
+                          }
+                          required
+                      />
+                    </label>
                     <select
                       value={bookingForm.durationMinutes}
                       onChange={(event) => setBookingForm({ ...bookingForm, durationMinutes: event.target.value })}

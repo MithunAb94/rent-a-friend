@@ -655,6 +655,18 @@ ul {
 }
 
 @media (max-width: 760px) {
+  .field input[type="date"],
+  .field input[type="time"] {
+    min-height: 52px;
+    font-size: 16px;
+  }
+
+  .field > span {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 760px) {
   .app-shell {
     padding: 16px;
   }
@@ -689,6 +701,38 @@ ul {
 
   .booking-card {
     flex-direction: column;
+  }
+
+  .field {
+    display: grid;
+    gap: 7px;
+    width: 100%;
+  }
+
+  .field > span {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .field input[type="date"],
+  .field input[type="time"] {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: rgba(255, 251, 246, 0.95);
+    color: var(--ink);
+    color-scheme: light;
+    -webkit-appearance: auto;
+    appearance: auto;
+  }
+
+  .field input[type="date"]:focus,
+  .field input[type="time"]:focus {
+    outline: 2px solid rgba(60, 141, 135, 0.25);
+    border-color: var(--teal);
   }
 }
 
