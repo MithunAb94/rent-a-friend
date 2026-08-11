@@ -5,6 +5,7 @@ import com.rentafriend.backend.dto.DashboardResponse;
 import com.rentafriend.backend.dto.DashboardStatsDto;
 import com.rentafriend.backend.model.UserAccount;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class DashboardService {
         this.listenerService = listenerService;
     }
 
+    @Transactional(readOnly = true)
     public DashboardResponse getDashboard(UserAccount user) {
         List<BookingSummaryDto> bookings = bookingService.getBookingsForUser(user);
         DashboardStatsDto stats = new DashboardStatsDto(

@@ -6,6 +6,7 @@ import com.rentafriend.backend.exception.ApiException;
 import com.rentafriend.backend.model.ListenerProfile;
 import com.rentafriend.backend.repository.ListenerProfileRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class ListenerService {
         this.listenerProfileRepository = listenerProfileRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<ListenerCardDto> getAllListeners() {
         return listenerProfileRepository.findAllByOrderByFeaturedDescRatingDescDisplayNameAsc()
                 .stream()
@@ -31,6 +33,7 @@ public class ListenerService {
         return toDetailDto(listener);
     }
 
+    @Transactional(readOnly = true)
     public List<ListenerCardDto> getRecommendations(int limit) {
         return listenerProfileRepository.findAllByOrderByFeaturedDescRatingDescDisplayNameAsc()
                 .stream()

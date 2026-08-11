@@ -30,12 +30,12 @@ public class ListenerProfile {
 
     private String city;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "listener_languages", joinColumns = @JoinColumn(name = "listener_id"))
     @Column(name = "language")
     private List<String> languages = new ArrayList<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "listener_support_areas", joinColumns = @JoinColumn(name = "listener_id"))
     @Column(name = "support_area")
     private List<String> supportAreas = new ArrayList<>();
